@@ -4,7 +4,7 @@ import (
 	"image"
 	"image/color"
 	"math"
-	"math/cmplx"
+	//"math/cmplx"
 )
 
 type Pixel struct {
@@ -23,7 +23,7 @@ func getIterations(c complex128, maxIterations int) Pixel {
 
 	for i := 0; i < maxIterations; i++ {
 		z = z*z + c
-		if cmplx.Abs(z) > 2 {
+		if real(z)*real(z) + imag(z)*imag(z) > 4 {
 			return Pixel{false, i}
 		}
 	}

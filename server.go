@@ -32,7 +32,7 @@ func cacheAllImages(layerList []layer, x, y, z uint64) error {
 	nw := complex(unitsAcross*float64(x)-2, unitsAcross*float64(imagesPerField-y)-2)
 	sw := complex(unitsAcross*float64(x+1)-2, unitsAcross*float64(imagesPerField-y-1)-2)
 
-	b := mandelbrot.MakeBitmap(nw, sw, 256, 1024)
+	b := mandelbrot.MakeBitmap(nw, sw, 128, 1024)
 
 	for _, layer := range layerList {
 		dirName := fmt.Sprintf("static/map/%s/%d/%d", layer.name, z, y)
