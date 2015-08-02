@@ -90,8 +90,10 @@ func mapHandler(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 
-	layerList := []layer{layer{"beetlejuice", mandelbrot.Stripey}}
-
+	layerList := []layer{
+		layer{"beetlejuice", mandelbrot.Stripey},
+		layer{"colour", mandelbrot.Multicolour}}
+	
 	if err := cacheAllImages(layerList, x, y, z); err != nil {
 		return err
 	}
