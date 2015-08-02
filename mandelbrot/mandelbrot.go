@@ -74,22 +74,22 @@ func Multicolour(p Pixel) (r, g, b uint8) {
 
 	var y, cb, cr, iterations uint8
 
-	iterations = uint8(p.Iterations%64)
+	iterations = uint8(p.Iterations % 64)
 	y = 193
-	
+
 	switch {
-	case p.Iterations < 16:
-		cb = iterations * 4
+	case iterations < 16:
+		cb = iterations * 16
 		cr = 0
-	case p.Iterations < 32:
+	case iterations < 32:
 		cb = 255
-		cr = uint8((iterations - 16)*4)
-	case p.Iterations < 48:
-		cb = uint8((48 - (iterations - 32)) * 4)
+		cr = uint8((iterations%16) * 16)
+	case iterations < 48:
+		cb = uint8((15 - (iterations%16)) * 16)
 		cr = 255
 	case true:
 		cb = 0
-		cr = uint8((64 - (p.Iterations - 48))*4)
+		cr = uint8((15 - (iterations%16)) * 16)
 	}
 
 	return color.YCbCrToRGB(y, cb, cr)
@@ -100,7 +100,7 @@ func Stripey(p Pixel) (r, g, b uint8) {
 		return 0, 0, 0
 	}
 
-	c := uint8(p.Iterations%2 * 255)
+	c := uint8(p.Iterations % 2 * 255)
 
 	return c, c, c
 }
