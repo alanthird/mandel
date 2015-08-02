@@ -67,14 +67,10 @@ func serveCachedFile(w http.ResponseWriter, r *http.Request) error {
 }
 
 func mapHandler(w http.ResponseWriter, r *http.Request) error {
-	if err := serveCachedFile(w, r); err == nil {
-		return nil
-	}
-
 	pathParts := strings.Split(r.URL.Path, "/")
 
 	z, err := strconv.ParseUint(pathParts[3], 10, 64)
-	if err != nil {
+	if err != nil || z > 45 {
 		return err
 	}
 
@@ -90,9 +86,15 @@ func mapHandler(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 
+	if err := serveCachedFile(w, r); err == nil {
+		return nil
+	}
+
 	layerList := []layer{
 		layer{"beetlejuice", mandelbrot.Stripey},
-		layer{"colour", mandelbrot.Multicolour}}
+		layer{"colour", mandelbrot.Multicolour},
+		layer{"flame", mandelbrot.Flame},
+		layer{"bluegreen", mandelbrot.BlueGreen}}
 	
 	if err := cacheAllImages(layerList, x, y, z); err != nil {
 		return err

@@ -20,19 +20,35 @@
          
          var beetlejuice = L.tileLayer('/map/beetlejuice/{z}/{y}/{x}', {
              attribution: 'Image data &copy; Alan Third',
-             maxZoom: 50,
+             maxZoom: 45,
              detectRetina: true,
              crs: L.CRS.Simple
-         }).addTo(map);
+         });
          
          var colour = L.tileLayer('/map/colour/{z}/{y}/{x}', {
              attribution: 'Image data &copy; Alan Third',
-             maxZoom: 50,
+             maxZoom: 45,
              detectRetina: true,
              crs: L.CRS.Simple
-         })
+         });
 
+         var flame = L.tileLayer('/map/flame/{z}/{y}/{x}', {
+             attribution: 'Image data &copy; Alan Third',
+             maxZoom: 45,
+             detectRetina: true,
+             crs: L.CRS.Simple
+         }).addTo(map);
+
+         var bluegreen = L.tileLayer('/map/bluegreen/{z}/{y}/{x}', {
+             attribution: 'Image data &copy; Alan Third',
+             maxZoom: 45,
+             detectRetina: true,
+             crs: L.CRS.Simple
+         });
+         
          var baseLayers = {
+             "Blue-green": bluegreen,
+             "Flame": flame,
              "Beetlejuice": beetlejuice,
              "Colour": colour
          };
