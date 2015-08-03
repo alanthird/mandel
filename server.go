@@ -67,7 +67,7 @@ func serveCachedFile(w http.ResponseWriter, r *http.Request) error {
 }
 
 func mapHandler(w http.ResponseWriter, r *http.Request) error {
-	pathParts := strings.Split(r.URL.Path, "/")
+	pathParts := strings.SplitN(r.URL.Path, "/", 6)
 
 	z, err := strconv.ParseUint(pathParts[3], 10, 64)
 	if err != nil || z > 45 {
